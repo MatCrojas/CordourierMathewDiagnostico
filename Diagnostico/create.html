@@ -10,21 +10,42 @@
 </head>
 
 <body>
-    <h1 id="names"></h1>
+    <h1>Persona Form</h1>
+    <div class="row g-3">
+        <div class="col-auto">
+          <label for="name" class="visually-hidden">Name</label>
+          <input type="text" class="form-control" id="name" placeholder="Juan Pedro Lopez...">
+        </div>
+
+        <div class="col-auto">
+            <label for="job" class="visually-hidden">Job</label>
+            <input type="text" class="form-control" id="job" placeholder="Obrero...">
+          </div>
+
+        <div class="col-auto">
+          <button onclick="register()" class="btn btn-primary mb-3">Send</button>
+        </div>
+      </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
     <script>
-
-
-        fetch('https://reqres.in/api/users?page=2')
+    function register(){
+        let nameForm = document.getElementById('name').value;
+        let jobForm = document.getElementById('job').value;
+        fetch('https://reqres.in/api/users', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ 
+                name: `${nameForm}` ,
+                job: `${jobForm}` })
+            })
             .then(res => res.json())
             .then(res => console.log(res))
-            .then(res => {
-                let name = document.getElementById('names');
-                name = 'asd';
-            })
-            .catch(err => console.error(err));
+        }
     </script>
 </body>
 
